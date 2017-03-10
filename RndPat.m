@@ -4,14 +4,13 @@ clc
 
 % Dual-Prism Pattern Generator (Random Pattern)  
 % Extend Single Pixel to 4 times
-% CMOS pixel feature: 6.5um * 6.5um 
-% Coded Aperture Mask pixel feature: (4*6.5um) * (4*6.5um) = 26um * 26um
-% Code Array Size: 1024 * 1024 
+% CMOS pixel feature: 6.5um x 6.5um 
+% Coded Aperture Mask pixel feature: (4x6.5um) * (4x6.5um) = 26um x 26um
+% Code Array Size: 256x256 
 % Half Clear and Half Opeque
 
-Mat = zeros(1024);
-Min = zeros(256);
-
+Mat = zeros(1024); % To store the pattern with 6.5um min feature
+Min = zeros(256); % To store the pattern with 26um min feature
 A = [0 0 1 0 ...
      1 1 0 1 ...
      0 0 1 0 ...
@@ -25,7 +24,7 @@ Order = randperm(16);
 
 Reorder = reshape(Order,4,4); % Shuffle Int Mat 
 
-Upsample = kron(Reorder,[1,1,1,1;1,1,1,1;1,1,1,1;1,1,1,1]); % Extend 4 times
+Upsample = kron(Reorder,[1,1,1,1; 1,1,1,1; 1,1,1,1;1,1,1,1]); % Extend 4 times
 
 ii = floor(i/16);
 jj = floor(j/16);
