@@ -21,11 +21,11 @@ side = 0.026; % mm(TracePro Unit) = 26um
 
 % s = side*[(N+1)/2-a,(N+1)/2-b,zeros(size(a,1),1)];
 
-Seq_Row = 3.328 - 0.013 - side*(a-1);
-Seq_Col = 3.328 - 0.013 - side*(b-1);
-Seq_Th = -0.0015/2*ones(size(a,1),1);
+Seq_Row = 3.328 - 0.013 - side*(a-1); % X - Height
+Seq_Col = 3.328 - 0.013 - side*(b-1); % Y - Width
+Seq_Th = -0.0015/2*ones(size(a,1),1); % Z - Half Thickness
 
-File_path = 'RndPat2.txt';
+File_path = 'RndPat.txt';
 
 
 fID0 = fopen(File_path,'wt');
@@ -34,7 +34,7 @@ fprintf(fID0, '%s\n', '(define SetBlocks');
 fprintf(fID0, '%s\n', '  (lambda ()');
 
 % Each 2000 to 31500 max
-for i = 31501:32768
+for i = 1:length(a)
     
 Name_block = strcat('    (define SetBlocks_ID_',num2str(i));
 Name_prop = strcat('    (property:apply-name SetBlocks_ID_',num2str(i),' "Block 1")');
